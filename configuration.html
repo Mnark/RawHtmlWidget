@@ -1,0 +1,61 @@
+ <!DOCTYPE html>
+    <html xmlns="http://www.w3.org/1999/xhtml">
+        <head>
+            <link rel="stylesheet" href="scripts/jquery.mobile-1.4.5.min.css">                            
+            <script src="sdk/scripts/VSS.SDK.min.js"></script> 
+            <script src="scripts/jquery.mobile-1.4.5.min.js"></script>     
+            <script type="text/javascript">
+                VSS.init({                        
+                    explicitNotifyLoaded: true,
+                    usePlatformStyles: true
+                });
+
+                VSS.require("TFS/Dashboards/WidgetHelpers", function (WidgetHelpers) {
+                    VSS.register("HtmlWidget.Configuration", function () {   
+                        var $queryDropdown = $("#htmltext");
+
+                        return {
+                            load: function (widgetSettings, widgetConfigurationContext) {
+                                var settings = JSON.parse(widgetSettings.customSettings.data);
+                                if (settings && settings.queryPath) {
+                                     $queryDropdown.val(settings.queryPath);
+                                 }
+
+                                 $queryDropdown.on("change", function () {
+                                     var customSettings = {data: JSON.stringify({queryPath: $queryDropdown.val()})};
+                                     var eventName = WidgetHelpers.WidgetEvent.ConfigurationChange;
+                                     var eventArgs = WidgetHelpers.WidgetEvent.Args(customSettings);
+                                     widgetConfigurationContext.notify(eventName, eventArgs);
+                                 });
+
+                                return WidgetHelpers.WidgetStatusHelper.Success();
+                            },
+                            onSave: function() {
+                                var customSettings = {data: JSON.stringify({queryPath: $queryDropdown.val()})};
+                                return WidgetHelpers.WidgetConfigurationSave.Valid(customSettings);    
+                            }
+                        }
+                    });
+                    VSS.notifyLoadSucceeded();
+                });
+            </script>          
+        </head>
+        <body>
+            <div class="container">
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend> Select Input Type:</legend>
+                    <input type="radio" name="txtInput" id="txtInput1" value="txt" checked="checked">
+                    <label for="txtInput1">Text</label>
+                    <input type="radio" name="txtInput" id="txtInput2" value="href" checked="checked">
+                    <label for="txtInput2">URL</label>
+                 </fieldset>  
+                <fieldset>
+                    <label class="label">Html: </label>
+                    <textarea id="htmltext" style="margin-top:10px" rows="20">
+                    </textarea>
+                    <label for="txtURL">URL
+                    <input id="txtURL" data-clear-btn="true">
+                </fieldset>  
+            </div>
+        </body>
+    </html>

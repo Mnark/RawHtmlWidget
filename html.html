@@ -1,0 +1,43 @@
+    <!DOCTYPE html>
+    <html style="height: 100%">
+        <head>            
+            <script src="sdk/scripts/VSS.SDK.min.js"></script> 
+      <script type="text/javascript">
+        VSS.init({
+            explicitNotifyLoaded: true,
+            usePlatformStyles: true
+        });
+
+        VSS.require("TFS/Dashboards/WidgetHelpers", function (WidgetHelpers) {
+                VSS.register("HtmlWidget", function () {                
+                    var projectId = VSS.getWebContext().project.id;
+
+                    var getQueryInfo = function (widgetSettings) {
+                        var settings = JSON.parse(widgetSettings.customSettings.data);
+                        var iframe1 = $('#iframe1');
+                        if (!settings || !settings.queryPath) {
+                            iframe1.empty();
+                            iframe1.text("Sorry nothing to show, please configure a query path.");
+                        }
+                       iframe1.contents().find('html').html(settings.queryPath);
+                        //iframe1.html(settings.queryPath);
+                        return WidgetHelpers.WidgetStatusHelper.Success();
+                    };
+
+                    return {
+                        load: function (widgetSettings) {
+                            return getQueryInfo(widgetSettings);
+                        },
+                        reload: function (widgetSettings) {
+                            return getQueryInfo(widgetSettings);
+                        }
+                    }
+                });
+            VSS.notifyLoadSucceeded();
+        });       
+    </script>     
+        </head>
+        <body style="height: 100%" >
+            <iframe id="iframe1" height="100%" width="100%" class="title">Last Updated Widget</iframe>
+        </body>
+    </html>

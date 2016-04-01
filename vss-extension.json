@@ -1,0 +1,138 @@
+{
+  "manifestVersion": 1,
+  "id": "vsts-extensions-myExtensions",
+  "version": "1.0.24",
+  "name": "A raw Html widget",
+  "description": "A raw Html widget",
+  "publisher": "markbasham",
+  "targets": [
+    {
+      "id": "Microsoft.VisualStudio.Services"
+    }
+  ],
+  "icons": {
+    "default": "img/logo.png"
+  },
+  "content": {
+        "details": {
+            "path": "overview.md"
+        }
+    },
+  "contributions": [
+    {
+      "id": "HtmlWidget",
+      "type": "ms.vss-dashboards-web.widget",
+      "targets": [
+        "ms.vss-dashboards-web.widget-catalog",
+        "markbasham.vsts-extensions-myExtensions.HtmlWidget.Configuration"
+      ],
+      "properties": {
+        "name": "HTML widget",
+        "description": "A raw html widget",
+        "previewImageUrl": "img/preview.png",
+        "uri": "html.html",
+        "supportedSizes": [
+                    {
+                        "rowSpan": 1,
+                        "columnSpan": 1
+                    },
+                    {
+                        "rowSpan": 1,
+                        "columnSpan": 2
+                    },
+                                        {
+                        "rowSpan": 1,
+                        "columnSpan": 3
+                    },
+                                        {
+                        "rowSpan": 1,
+                        "columnSpan": 4
+                    },
+                    {
+                        "rowSpan": 2,
+                        "columnSpan": 1
+                    },
+                    {
+                        "rowSpan": 2,
+                        "columnSpan": 2
+                    },
+                    {
+                        "rowSpan": 2,
+                        "columnSpan": 3
+                    },
+                                        {
+                        "rowSpan": 2,
+                        "columnSpan": 4
+                    },                    {
+                        "rowSpan": 3,
+                        "columnSpan": 1
+                    },
+                    {
+                        "rowSpan": 3,
+                        "columnSpan": 2
+                    },
+                                        {
+                        "rowSpan": 3,
+                        "columnSpan": 3
+                    },
+                                        {
+                        "rowSpan": 3,
+                        "columnSpan": 4
+                    },                    {
+                        "rowSpan": 4,
+                        "columnSpan": 1
+                    },
+                    {
+                        "rowSpan": 4,
+                        "columnSpan": 2
+                    },
+                                        {
+                        "rowSpan": 4,
+                        "columnSpan": 3
+                    },
+                                        {
+                        "rowSpan": 4,
+                        "columnSpan": 4
+                    }
+        ],
+        "supportedScopes": [ "project_team" ]
+      }
+    },
+    {
+      "id": "HtmlWidget.Configuration",
+      "type": "ms.vss-dashboards-web.widget-configuration",
+      "targets": [ "ms.vss-dashboards-web.widget-configuration" ],
+      "properties": {
+        "name": "HtmlWidget Configuration",
+        "description": "Configures HtmlWidget",
+        "uri": "configuration.html"
+      }
+    }
+  ],
+  "files": [
+    {
+      "path": "html.html",
+      "addressable": true
+    },
+    {
+      "path": "configuration.html",
+      "addressable": true
+    },
+    {
+      "path": "overview.md",
+      "addressable": true
+    },
+    {
+      "path": "sdk/scripts",
+      "addressable": true
+    },
+    {
+      "path": "scripts",
+      "addressable": true
+    },
+    {
+      "path": "img",
+      "addressable": true
+    }
+  ]
+}
